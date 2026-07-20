@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>هاكاثون ابتكار الجوازات 2026 — بوابة الفريق</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green-deep:#0c3d2e;
+    --green-mid:#175c43;
+    --green-pale:#e7f0e9;
+    --gold:#c9a24b;
+    --gold-soft:#e6d3a0;
+    --cream:#f7f3e8;
+    --ink:#16231d;
+    --ink-soft:#4a5750;
+    --line:#d8cfb8;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Almarai', sans-serif;
+    background:
+      radial-gradient(1200px 600px at 85% -10%, rgba(201,162,75,0.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(23,92,67,0.15), transparent 60%),
+      var(--cream);
+    color:var(--ink);
+    min-height:100vh;
+    line-height:1.6;
+  }
+
+  .wrap{max-width:880px;margin:0 auto;padding:28px 20px 80px;}
+
+  /* ===== Header / passport stamp hero ===== */
+  header.hero{
+    background:linear-gradient(160deg, var(--green-deep), var(--green-mid) 85%);
+    border-radius:var(--radius);
+    padding:34px 26px 30px;
+    color:var(--cream);
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 12px 30px -14px rgba(12,61,46,0.55);
+  }
+  header.hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 26px);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--gold-soft); font-weight:800; margin:0 0 10px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--gold-soft);display:inline-block;}
+  h1.title{
+    font-family:'Aref Ruqaa', serif;
+    font-size:clamp(26px, 4.4vw, 38px);
+    margin:0 0 4px;
+    font-weight:700;
+    line-height:1.3;
+  }
+  .subtitle{color:#cfe4d8; font-size:14px; margin:0 0 24px;}
+
+  .stamp-row{
+    display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+  }
+  .stamp{
+    width:104px; height:104px; border-radius:50%;
+    border:3px dashed var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    position:relative;
+    transform:rotate(-6deg);
+  }
+  .stamp::after{
+    content:"";
+    position:absolute; inset:8px;
+    border:1px solid rgba(230,211,160,0.5);
+    border-radius:50%;
+  }
+  .stamp-text{
+    font-family:'Aref Ruqaa', serif;
+    font-size:15px;
+    font-weight:700;
+    color:var(--gold-soft);
+    text-align:center;
+    line-height:1.25;
+  }
+  .team-block{flex:1; min-width:200px;}
+  .team-label{font-size:12px;color:#bcd8c8;margin:0 0 2px;}
+  .team-name{font-size:24px;font-weight:800;margin:0;color:#fff;}
+
+  /* ===== sections ===== */
+  section{margin-top:22px;}
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px;
+  }
+  .section-head{
+    display:flex; align-items:center; gap:10px; margin-bottom:16px;
+  }
+  .section-icon{
+    width:34px;height:34px;border-radius:9px;
+    background:var(--green-pale); color:var(--green-deep);
+    display:flex; align-items:center; justify-content:center;
+    font-size:17px; flex-shrink:0;
+  }
+  .section-title{font-size:18px; font-weight:800; margin:0;}
+  .section-sub{font-size:13px;color:var(--ink-soft);margin:2px 0 0;}
+
+  /* ===== zoom card ===== */
+  .zoom-card{
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+    justify-content:space-between;
+  }
+  .zoom-meta{font-size:13px;color:var(--ink-soft);}
+  .zoom-meta b{color:var(--ink);}
+  .btn-join{
+    background:var(--green-deep); color:#fff;
+    border:none; border-radius:999px;
+    padding:14px 30px; font-size:15px; font-weight:800;
+    font-family:inherit; cursor:pointer;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    box-shadow:0 8px 18px -8px rgba(12,61,46,0.55);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-join:hover{transform:translateY(-2px); box-shadow:0 12px 22px -8px rgba(12,61,46,0.6);}
+  .btn-join svg{width:18px;height:18px;}
+
+  /* ===== agenda tabs ===== */
+  .tabs{display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;}
+  .tab-btn{
+    font-family:inherit; font-size:13px; font-weight:800;
+    padding:9px 18px; border-radius:999px; border:1px solid var(--line);
+    background:#fff; color:var(--ink-soft); cursor:pointer;
+  }
+  .tab-btn.active{
+    background:var(--green-deep); color:#fff; border-color:var(--green-deep);
+  }
+  .agenda-list{list-style:none; margin:0; padding:0;}
+  .agenda-item{
+    display:grid; grid-template-columns:96px 1fr; gap:14px;
+    padding:12px 0; border-bottom:1px dashed var(--line);
+  }
+  .agenda-item:last-child{border-bottom:none;}
+  .agenda-time{
+    font-size:12.5px; font-weight:800; color:var(--green-deep);
+    background:var(--green-pale); border-radius:8px;
+    padding:6px 8px; text-align:center; align-self:start;
+    white-space:nowrap;
+  }
+  .agenda-name{font-size:14.5px; align-self:center;}
+
+  /* ===== leaderboard ===== */
+  .lb-status{font-size:12.5px; color:var(--ink-soft); margin-bottom:14px; display:flex; align-items:center; gap:6px;}
+  .lb-dot{width:7px;height:7px;border-radius:50%;background:#3fa66a; box-shadow:0 0 0 4px rgba(63,166,106,0.18);}
+  table.lb{width:100%; border-collapse:collapse;}
+  table.lb th{
+    text-align:right; font-size:11.5px; text-transform:uppercase; letter-spacing:.04em;
+    color:var(--ink-soft); font-weight:800; padding:0 10px 10px; border-bottom:2px solid var(--line);
+  }
+  table.lb td{padding:12px 10px; border-bottom:1px solid var(--line); font-size:14.5px;}
+  table.lb tr:last-child td{border-bottom:none;}
+  .rank-badge{
+    width:30px;height:30px;border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:800; border:2px solid var(--line); color:var(--ink-soft);
+  }
+  .rank-badge.gold{border-color:var(--gold); color:var(--gold); background:#fdf7e8;}
+  .rank-badge.silver{border-color:#b7bcc4; color:#8a8f97; background:#f5f6f7;}
+  .rank-badge.bronze{border-color:#c98a4b; color:#a86a34; background:#fbf1e6;}
+  .avg{font-weight:800; color:var(--green-deep);}
+  .judges-count{color:var(--ink-soft); font-size:12px;}
+
+  footer{
+    text-align:center; margin-top:32px; font-size:12px; color:var(--ink-soft);
+  }
+
+  @media (max-width:520px){
+    .zoom-card{flex-direction:column; align-items:stretch;}
+    .btn-join{justify-content:center;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .btn-join{transition:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">هيئة الجوازات × إيجاد التقنية</p>
+    <h1 class="title">هاكاثون ابتكار الجوازات 2026</h1>
+    <p class="subtitle">بوابة الفريق — كل ما تحتاجه للمشاركة في الهاكاثون الافتراضي</p>
+    <div class="stamp-row">
+      <div class="stamp"><span class="stamp-text">مرحبًا<br>بكم</span></div>
+      <div class="team-block">
+        <p class="team-label">الفريق المسجّل</p>
+        <p class="team-name" id="teamName">—</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="card zoom-card">
+    <div>
+      <div class="section-head" style="margin-bottom:6px;">
+        <span class="section-icon">🎥</span>
+        <div>
+          <p class="section-title">رابط الاجتماع على Zoom</p>
+          <p class="section-sub">نفس الرابط يُستخدم لكل أيام الهاكاثون الثلاثة</p>
+        </div>
+      </div>
+      <p class="zoom-meta">معرّف الاجتماع: <b>823 9632 2097</b></p>
+    </div>
+    <a class="btn-join" href="https://us06web.zoom.us/j/82396322097?pwd=EXW0ZbzkKeqCiVm8IUriH0NGaD3pfD.1" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l4.55-3.4A1 1 0 0121 7.4v9.2a1 1 0 01-1.45.8L15 14"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg>
+      انضم للاجتماع
+    </a>
+  </section>
+
+  <section class="card">
+    <div class="section-head">
+      <span class="section-icon">📅</span>
+      <div>
+        <p class="section-title">أجندة الهاكاثون</p>
+        <p class="section-sub">3–6 أغسطس 2026 (بتوقيت الرياض)</p>
+      </div>
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <ul class="agenda-list" id="agendaList"></ul>
+  </section>
+
+  <section class="card">
+    <div class="section-head">
+      <span class="section-icon">🏆</span>
+      <div>
+        <p class="section-title">لوحة الترتيب</p>
+        <p class="section-sub">متوسط تقييم كل فريق من لجنة التحكيم</p>
+      </div>
+    </div>
+    <p class="lb-status"><span class="lb-dot"></span><span id="lbStatusText">جارِ تحميل النتائج...</span></p>
+    <table class="lb">
+      <thead>
+        <tr><th>الترتيب</th><th>الفريق</th><th>المتوسط</th></tr>
+      </thead>
+      <tbody id="lbBody"></tbody>
+    </table>
+  </section>
+
+  <footer>هاكاثون ابتكار الجوازات 2026 — بالشراكة مع إيجاد التقنية</footer>
+</div>
+
+<script>
+  // ---------- Team name from URL ----------
+  const params = new URLSearchParams(window.location.search);
+  const teamParam = params.get('team');
+  const displayName = teamParam ? teamParam.replace(/-/g, ' ') : 'ضيف';
+  document.getElementById('teamName').textContent = displayName;
+
+  // ---------- Agenda data (times from the official agenda) ----------
+  const AGENDA = {
+    "اليوم الأول — 3 أغسطس": [
+      ["9:00 – 9:05 ص","الترحيب بالمشاركين"],
+      ["9:05 – 9:15 ص","كلمة افتتاحية من الهيئة العامة للجوازات"],
+      ["9:15 – 9:30 ص","انطلاق الهاكاثون"],
+      ["9:30 – 9:40 ص","نشاط كسر الجمود"],
+      ["9:40 – 10:15 ص","ورشة عمل: التفكير التصميمي وتجربة المستخدم"],
+      ["10:15 – 10:45 ص","عصف ذهني للتحديات"],
+      ["10:45 – 11:20 ص","اكتشاف التحدي"],
+      ["11:20 – 11:50 ص","خريطة التعاطف"],
+      ["11:50 – 12:00 م","أداء المقابلات"],
+      ["12:00 – 12:25 م","استراحة الظهر"],
+      ["12:25 – 1:15 م","استكمال أداء المقابلات"],
+      ["1:15 – 1:50 م","مصفوفة الرؤى"],
+      ["1:50 – 2:50 م","توليد الأفكار"],
+      ["2:50 – 3:30 م","اختيار الفكرة"],
+      ["3:25 – 3:50 م","استراحة العصر"],
+      ["3:55 – 4:00 م","ختام اليوم الأول"],
+    ],
+    "اليوم الثاني — 4-5 أغسطس": [
+      ["9:00 – 9:10 ص","كلمة ترحيبية ومراجعة مخرجات اليوم الأول"],
+      ["9:10 – 9:25 ص","نشاط كسر الجمود"],
+      ["9:25 – 10:15 ص","ورشة عمل: بناء الحل التقني — النموذج الأولي"],
+      ["10:15 – 10:55 ص","تعريف المفهوم"],
+      ["10:55 – 12:00 م","بناء النموذج الأولي"],
+      ["12:00 – 12:25 م","استراحة الظهر"],
+      ["12:25 – 1:35 م","متابعة بناء النموذج الأولي"],
+      ["1:35 – 2:25 م","ورشة عمل: تحضير العرض التقديمي"],
+      ["2:25 – 3:20 م","إعداد وتجهيز العرض النهائي"],
+      ["3:20 – 3:45 م","استراحة العصر"],
+      ["3:45 – 4:00 م","تسليم العرض النهائي وختام اليوم الثاني"],
+    ],
+    "اليوم الثالث — 6 أغسطس": [
+      ["9:00 – 9:10 ص","كلمة ترحيبية"],
+      ["9:10 – 9:25 ص","نشاط كسر الجمود"],
+      ["9:25 – 9:40 ص","توجيه وآلية التحكيم"],
+      ["9:40 – 12:00 م","انطلاق التحكيم"],
+      ["12:00 – 12:25 م","استراحة الظهر"],
+      ["12:25 – 2:30 م","استكمال مرحلة التحكيم"],
+      ["2:30 – 2:45 م","كلمة القيادة والراعي"],
+      ["2:45 – 3:20 م","الإعلان عن النتائج"],
+      ["3:20 – 3:45 م","استراحة العصر"],
+      ["3:45 – 3:55 م","تكريم الفائزين"],
+      ["3:55 – 4:00 م","ختام الهاكاثون"],
+    ],
+  };
+
+  const dayNames = Object.keys(AGENDA);
+  const tabsEl = document.getElementById('tabs');
+  const agendaListEl = document.getElementById('agendaList');
+
+  function renderAgenda(dayIndex){
+    agendaListEl.innerHTML = '';
+    AGENDA[dayNames[dayIndex]].forEach(([time, name]) => {
+      const li = document.createElement('li');
+      li.className = 'agenda-item';
+      li.innerHTML = `<span class="agenda-time">${time}</span><span class="agenda-name">${name}</span>`;
+      agendaListEl.appendChild(li);
+    });
+  }
+
+  dayNames.forEach((day, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' + (i === 0 ? ' active' : '');
+    btn.textContent = day;
+    btn.onclick = () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderAgenda(i);
+    };
+    tabsEl.appendChild(btn);
+  });
+  renderAgenda(0);
+
+  // ---------- Live leaderboard ----------
+  const LEADERBOARD_URL = 'https://hackathon-leaderboard.innovationraces.workers.dev/';
+  const lbBody = document.getElementById('lbBody');
+  const lbStatusText = document.getElementById('lbStatusText');
+
+  function rankBadgeClass(rank){
+    if (rank === 1) return 'gold';
+    if (rank === 2) return 'silver';
+    if (rank === 3) return 'bronze';
+    return '';
+  }
+
+  async function loadLeaderboard(){
+    try{
+      const res = await fetch(LEADERBOARD_URL, { cache: 'no-store' });
+      const data = await res.json();
+      const list = data.leaderboard || [];
+
+      if (list.length === 0){
+        lbStatusText.textContent = 'لا توجد نتائج بعد — سيتم التحديث تلقائيًا فور بدء التحكيم';
+        lbBody.innerHTML = '';
+        return;
+      }
+
+      lbStatusText.textContent = 'محدَّث الآن — يتم التحديث تلقائيًا';
+      lbBody.innerHTML = list.map(row => `
+        <tr>
+          <td><span class="rank-badge ${rankBadgeClass(row.rank)}">${row.rank}</span></td>
+          <td>${row.team}${teamParam && row.team === teamParam ? ' <span style="color:#175c43;font-size:12px;">(فريقكم)</span>' : ''}</td>
+          <td><span class="avg">${row.average}</span> <span class="judges-count">/ 10 · ${row.judgesCount} محكّم</span></td>
+        </tr>
+      `).join('');
+    }catch(err){
+      lbStatusText.textContent = 'تعذّر تحميل النتائج، جارٍ إعادة المحاولة...';
+    }
+  }
+
+  loadLeaderboard();
+  setInterval(loadLeaderboard, 30000);
+</script>
+</body>
+</html>
