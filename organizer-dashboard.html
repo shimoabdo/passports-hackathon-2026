@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>هاكاثون ابتكار الجوازات 2026 — داشبورد المنظمين</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root{
+    --green-deep:#0c3d2e;
+    --green-mid:#175c43;
+    --green-pale:#e7f0e9;
+    --gold:#c9a24b;
+    --gold-soft:#e6d3a0;
+    --cream:#f7f3e8;
+    --ink:#16231d;
+    --ink-soft:#4a5750;
+    --line:#d8cfb8;
+    --radius:14px;
+    --danger:#b3402c;
+    --ok:#3fa66a;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Almarai', sans-serif;
+    background:
+      radial-gradient(1200px 600px at 85% -10%, rgba(201,162,75,0.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(23,92,67,0.15), transparent 60%),
+      var(--cream);
+    color:var(--ink);
+    min-height:100vh;
+    line-height:1.6;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:28px 20px 80px;}
+
+  header.hero{
+    background:linear-gradient(160deg, var(--green-deep), var(--green-mid) 85%);
+    border-radius:var(--radius);
+    padding:34px 26px 30px;
+    color:var(--cream);
+    position:relative; overflow:hidden;
+    box-shadow:0 12px 30px -14px rgba(12,61,46,0.55);
+    margin-bottom:22px;
+  }
+  header.hero::before{
+    content:""; position:absolute; inset:0;
+    background-image:repeating-linear-gradient(45deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 26px);
+    pointer-events:none;
+  }
+  .eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-soft); font-weight:800; margin:0 0 10px; display:flex; align-items:center; gap:8px;}
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--gold-soft);display:inline-block;}
+  h1.title{font-family:'Aref Ruqaa', serif; font-size:clamp(22px,4vw,32px); margin:0 0 6px; font-weight:700;}
+  .subtitle{color:#cfe4d8; font-size:13.5px; margin:0;}
+
+  .summary-row{display:flex; gap:14px; margin-top:20px; flex-wrap:wrap;}
+  .summary-card{background:rgba(255,255,255,0.09); border:1px solid rgba(230,211,160,0.25); border-radius:12px; padding:14px 20px; min-width:120px;}
+  .summary-card b{display:block; font-size:26px; color:#fff;}
+  .summary-card span{font-size:11.5px; color:#bcd8c8;}
+
+  section{margin-top:22px;}
+  .card{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:22px;}
+  .section-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:8px;}
+  .section-title{font-size:17px; font-weight:800; margin:0;}
+  .refresh-note{font-size:12px; color:var(--ink-soft); display:flex; align-items:center; gap:6px;}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--ok); box-shadow:0 0 0 4px rgba(63,166,106,0.18);}
+
+  table.lb{width:100%; border-collapse:collapse;}
+  table.lb th{text-align:right; font-size:11px; text-transform:uppercase; color:var(--ink-soft); font-weight:800; padding:0 8px 10px; border-bottom:2px solid var(--line);}
+  table.lb td{padding:11px 8px; border-bottom:1px solid var(--line); font-size:14px;}
+  .rank-badge{width:26px;height:26px;border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; border:2px solid var(--line); color:var(--ink-soft);}
+  .rank-badge.gold{border-color:var(--gold); color:var(--gold); background:#fdf7e8;}
+  .rank-badge.silver{border-color:#b7bcc4; color:#8a8f97; background:#f5f6f7;}
+  .rank-badge.bronze{border-color:#c98a4b; color:#a86a34; background:#fbf1e6;}
+  .avg{font-weight:800; color:var(--green-deep);}
+  .progress-wrap{display:flex; align-items:center; gap:8px;}
+  .progress-bar{flex:1; height:8px; border-radius:5px; background:var(--green-pale); overflow:hidden; min-width:70px;}
+  .progress-fill{height:100%; background:var(--green-mid); border-radius:5px;}
+  .progress-fill.complete{background:var(--ok);}
+  .progress-text{font-size:12px; font-weight:800; color:var(--ink-soft); white-space:nowrap;}
+
+  .team-cov-grid{display:grid; grid-template-columns:1fr; gap:10px;}
+  .cov-item{border:1px solid var(--line); border-radius:10px; padding:12px 14px;}
+  .cov-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; cursor:pointer;}
+  .cov-team-name{font-weight:800; font-size:14.5px;}
+  .cov-status{font-size:12px; font-weight:800; padding:3px 10px; border-radius:999px;}
+  .cov-status.complete{background:#e6f4ec; color:var(--ok);}
+  .cov-status.pending{background:#fbeee9; color:var(--danger);}
+  .missing-list{font-size:12.5px; color:var(--ink-soft); margin:8px 0 0; display:none;}
+  .missing-list.open{display:block;}
+  .missing-list b{color:var(--ink);}
+
+  footer{text-align:center; margin-top:20px; font-size:12px; color:var(--ink-soft);}
+
+  /* top 5 podium */
+  .podium{display:grid; grid-template-columns:repeat(5,1fr); gap:10px;}
+  .podium-card{
+    background:var(--green-pale); border-radius:12px; padding:16px 10px 14px;
+    text-align:center; border:2px solid transparent;
+  }
+  .podium-card.p1{background:#fdf7e8; border-color:var(--gold);}
+  .podium-card.p2{background:#f5f6f7; border-color:#b7bcc4;}
+  .podium-card.p3{background:#fbf1e6; border-color:#c98a4b;}
+  .podium-rank{
+    width:34px;height:34px;border-radius:50%; margin:0 auto 8px;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:14px; background:#fff; color:var(--green-deep);
+    border:2px solid var(--green-mid);
+  }
+  .podium-card.p1 .podium-rank{border-color:var(--gold); color:var(--gold);}
+  .podium-card.p2 .podium-rank{border-color:#8a8f97; color:#8a8f97;}
+  .podium-card.p3 .podium-rank{border-color:#a86a34; color:#a86a34;}
+  .podium-team{font-weight:800; font-size:13.5px; margin-bottom:4px; word-break:break-word;}
+  .podium-avg{font-size:17px; font-weight:800; color:var(--green-deep);}
+
+  .chart-wrap{position:relative; height:320px;}
+
+  @media (max-width:620px){
+    .podium{grid-template-columns:1fr 1fr; grid-template-rows:auto auto auto;}
+  }
+
+  /* password gate — same pattern as judging page */
+  #gate{position:fixed; inset:0; z-index:50; background:linear-gradient(160deg, var(--green-deep), var(--green-mid) 85%); display:flex; align-items:center; justify-content:center; padding:20px;}
+  .gate-card{background:#fff; border-radius:var(--radius); padding:32px 26px; max-width:360px; width:100%; text-align:center; box-shadow:0 20px 40px -20px rgba(0,0,0,0.4);}
+  .gate-card .stamp-ic{width:60px;height:60px;border-radius:50%; border:3px dashed var(--gold); margin:0 auto 16px; display:flex; align-items:center; justify-content:center; font-size:22px;}
+  .gate-card h2{font-family:'Aref Ruqaa', serif; font-size:20px; margin:0 0 6px; color:var(--green-deep);}
+  .gate-card p{font-size:13px; color:var(--ink-soft); margin:0 0 18px;}
+  .gate-card input{width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line); font-family:inherit; font-size:15px; text-align:center; margin-bottom:12px; box-sizing:border-box;}
+  .gate-card button{width:100%; padding:12px; border:none; border-radius:10px; background:var(--green-deep); color:#fff; font-family:inherit; font-size:14.5px; font-weight:800; cursor:pointer;}
+  .gate-error{color:var(--danger); font-size:12.5px; margin-top:10px; display:none;}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-card">
+    <div class="stamp-ic">🔒</div>
+    <h2>داشبورد المنظمين</h2>
+    <p>هذه الصفحة مخصصة لفريق التنظيم فقط.</p>
+    <input type="password" id="gatePass" placeholder="كلمة المرور" autocomplete="off">
+    <button id="gateBtn">دخول</button>
+    <p class="gate-error" id="gateError">كلمة المرور غير صحيحة.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">هيئة الجوازات × إيجاد التقنية</p>
+    <h1 class="title">داشبورد المنظمين — متابعة لايف</h1>
+    <p class="subtitle">هاكاثون ابتكار الجوازات 2026</p>
+    <div class="summary-row" id="summaryRow"></div>
+  </header>
+
+  <section class="card">
+    <div class="section-head">
+      <p class="section-title">أفضل 5 فرق</p>
+    </div>
+    <div class="podium" id="podium"></div>
+  </section>
+
+  <section class="card">
+    <div class="section-head">
+      <p class="section-title">مخطط المتوسطات لكل الفرق</p>
+      <p class="refresh-note"><span class="dot"></span><span>يتحدث لايف</span></p>
+    </div>
+    <div class="chart-wrap"><canvas id="scoreChart"></canvas></div>
+  </section>
+
+  <section class="card">
+    <div class="section-head">
+      <p class="section-title">لوحة الترتيب</p>
+      <p class="refresh-note"><span class="dot"></span><span id="lbNote">محدَّث الآن</span></p>
+    </div>
+    <table class="lb">
+      <thead><tr><th>الترتيب</th><th>الفريق</th><th>المتوسط</th></tr></thead>
+      <tbody id="lbBody"></tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <div class="section-head">
+      <p class="section-title">تغطية التحكيم لكل فريق</p>
+      <p class="refresh-note">اضغطي على أي فريق لعرض أسماء المحكمين الناقصين</p>
+    </div>
+    <div class="team-cov-grid" id="covGrid"></div>
+  </section>
+
+  <footer>هاكاثون ابتكار الجوازات 2026 — بالشراكة مع إيجاد التقنية</footer>
+</div>
+
+<script>
+  const ALL_JUDGES = [
+    "عقيد/د. ماجد الرويثي",
+    "نقيب/عبدالعزيز طارق المعشوق",
+    "نقيب م/يعقوب زعل الرشيدي",
+    "د. تهاني السبيت",
+    "م. طارق الجابري",
+    "أ. حمد العويشاني",
+    "د. محسن مراد",
+    "أ.د. ماجد القثامي",
+    "أ. سميرة جمال الدين",
+    "د.هشام الهليل",
+    "د.خالد العتيبي"
+  ];
+  const TOTAL_TEAMS = 15;
+  const LEADERBOARD_URL = 'https://hackathon-leaderboard.innovationraces.workers.dev/';
+
+  const lbBody = document.getElementById('lbBody');
+  const lbNote = document.getElementById('lbNote');
+  const covGrid = document.getElementById('covGrid');
+  const summaryRow = document.getElementById('summaryRow');
+  const podium = document.getElementById('podium');
+  const chartCanvas = document.getElementById('scoreChart');
+  let scoreChart = null;
+
+  function renderPodium(list){
+    const top5 = list.slice(0, 5);
+    podium.innerHTML = top5.map(row => `
+      <div class="podium-card p${row.rank}">
+        <div class="podium-rank">${row.rank}</div>
+        <div class="podium-team">${row.team}</div>
+        <div class="podium-avg">${row.average}</div>
+      </div>
+    `).join('') || `<p style="grid-column:1/-1;text-align:center;color:var(--ink-soft);padding:10px;">لا توجد نتائج بعد</p>`;
+  }
+
+  function renderChart(list){
+    const labels = list.map(r => r.team);
+    const values = list.map(r => r.average);
+
+    if (!scoreChart){
+      scoreChart = new Chart(chartCanvas, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'المتوسط',
+            data: values,
+            backgroundColor: '#175c43',
+            borderRadius: 6,
+            maxBarThickness: 34,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 400 },
+          scales: {
+            y: { beginAtZero: true, max: 10, grid: { color: '#e7e2d3' } },
+            x: { grid: { display: false } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    } else {
+      scoreChart.data.labels = labels;
+      scoreChart.data.datasets[0].data = values;
+      scoreChart.update();
+    }
+  }
+
+  function rankBadgeClass(rank){
+    if (rank === 1) return 'gold';
+    if (rank === 2) return 'silver';
+    if (rank === 3) return 'bronze';
+    return '';
+  }
+
+  async function loadData(){
+    try{
+      const res = await fetch(LEADERBOARD_URL, { cache: 'no-store' });
+      const data = await res.json();
+      const list = data.leaderboard || [];
+
+      // ---- leaderboard table ----
+      lbNote.textContent = 'محدَّث الآن — يتحدث تلقائيًا';
+      lbBody.innerHTML = list.length === 0
+        ? `<tr><td colspan="3" style="text-align:center;color:var(--ink-soft);padding:20px;">لا توجد تقييمات بعد</td></tr>`
+        : list.map(row => `
+          <tr>
+            <td><span class="rank-badge ${rankBadgeClass(row.rank)}">${row.rank}</span></td>
+            <td>${row.team}</td>
+            <td><span class="avg">${row.average}</span></td>
+          </tr>
+        `).join('');
+
+      renderPodium(list);
+      renderChart(list);
+
+      // ---- coverage ----
+      const byTeam = {};
+      list.forEach(row => { byTeam[row.team] = row.judges || []; });
+
+      let completeCount = 0;
+      let covHtml = '';
+      for (let n = 1; n <= TOTAL_TEAMS; n++){
+        const teamKey = `team ${n}`;
+        const judgesDone = byTeam[teamKey] || byTeam[`team${n}`] || [];
+        const missing = ALL_JUDGES.filter(j => !judgesDone.includes(j));
+        const isComplete = missing.length === 0 && judgesDone.length > 0;
+        if (isComplete) completeCount++;
+
+        covHtml += `
+          <div class="cov-item">
+            <div class="cov-head" onclick="this.nextElementSibling.classList.toggle('open')">
+              <span class="cov-team-name">فريق ${n}</span>
+              <div class="progress-wrap" style="max-width:220px;">
+                <div class="progress-bar"><div class="progress-fill ${isComplete ? 'complete' : ''}" style="width:${Math.min(100, (judgesDone.length / ALL_JUDGES.length) * 100)}%"></div></div>
+                <span class="progress-text">${judgesDone.length}/${ALL_JUDGES.length}</span>
+              </div>
+              <span class="cov-status ${isComplete ? 'complete' : 'pending'}">${isComplete ? 'مكتمل' : 'لسه ناقص'}</span>
+            </div>
+            <p class="missing-list">
+              ${missing.length ? `<b>محكّمون لسه ما قيّموش:</b> ${missing.join('، ')}` : 'كل المحكمين قيّموا هذا الفريق ✓'}
+            </p>
+          </div>
+        `;
+      }
+      covGrid.innerHTML = covHtml;
+
+      // ---- summary ----
+      summaryRow.innerHTML = `
+        <div class="summary-card"><b>${completeCount}/${TOTAL_TEAMS}</b><span>فرق اكتمل تحكيمها</span></div>
+        <div class="summary-card"><b>${list.reduce((s,r)=>s+r.judgesCount,0)}</b><span>تقييمات مُرسلة إجمالًا</span></div>
+        <div class="summary-card"><b>${TOTAL_TEAMS * ALL_JUDGES.length}</b><span>إجمالي التقييمات المتوقعة</span></div>
+      `;
+    }catch(err){
+      lbNote.textContent = 'تعذّر تحميل البيانات، جارٍ إعادة المحاولة...';
+    }
+  }
+
+  loadData();
+  setInterval(loadData, 20000);
+
+  // ---------- Password gate ----------
+  const GATE_PASSWORD = 'جوازات2026';
+  const gate = document.getElementById('gate');
+  const gatePass = document.getElementById('gatePass');
+  const gateBtn = document.getElementById('gateBtn');
+  const gateError = document.getElementById('gateError');
+
+  function tryUnlock(){
+    if (gatePass.value.trim() === GATE_PASSWORD){
+      sessionStorage.setItem('orgUnlocked', '1');
+      gate.style.display = 'none';
+    } else {
+      gateError.style.display = 'block';
+    }
+  }
+  if (sessionStorage.getItem('orgUnlocked') === '1'){ gate.style.display = 'none'; }
+  gateBtn.addEventListener('click', tryUnlock);
+  gatePass.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+</script>
+</body>
+</html>
