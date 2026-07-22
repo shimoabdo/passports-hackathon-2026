@@ -197,14 +197,15 @@
 <div class="wrap">
 
   <header class="hero">
+    <a href="hub-page.html" style="color:var(--gold-soft); font-weight:800; text-decoration:none; font-size:13px; display:inline-block; margin-bottom:14px;">→ الصفحة الرئيسية</a>
     <p class="eyebrow">هيئة الجوازات × إيجاد التقنية</p>
     <h1 class="title">هاكاثون ابتكار الجوازات 2026</h1>
-    <p class="subtitle">بوابة الفريق — كل ما تحتاجه للمشاركة في الهاكاثون الافتراضي</p>
+    <p class="subtitle">بوابة المشاركين — كل ما تحتاجه للمشاركة في الهاكاثون الافتراضي</p>
     <div class="stamp-row">
       <div class="stamp"><span class="stamp-text">مرحبًا<br>بكم</span></div>
       <div class="team-block">
-        <p class="team-label">الفريق المسجّل</p>
-        <p class="team-name" id="teamName">—</p>
+        <p class="team-label">جميع الفرق المشاركة</p>
+        <p class="team-name">هاكاثون ابتكار الجوازات 2026</p>
       </div>
     </div>
   </header>
@@ -263,12 +264,6 @@
 </div>
 
 <script>
-  // ---------- Team name from URL ----------
-  const params = new URLSearchParams(window.location.search);
-  const teamParam = params.get('team');
-  const displayName = teamParam ? teamParam.replace(/-/g, ' ') : 'ضيف';
-  document.getElementById('teamName').textContent = displayName;
-
   // ---------- Agenda data (times from the official agenda) ----------
   const AGENDA = {
     "اليوم الأول — 3 أغسطس": [
@@ -372,7 +367,7 @@
       lbBody.innerHTML = list.map(row => `
         <tr>
           <td><span class="rank-badge ${rankBadgeClass(row.rank)}">${row.rank}</span></td>
-          <td>${row.team}${teamParam && row.team === teamParam ? ' <span style="color:#175c43;font-size:12px;">(فريقكم)</span>' : ''}</td>
+          <td>${row.team}</td>
           <td><span class="avg">${row.average}</span> <span class="judges-count">/ 10 · ${row.judgesCount} محكّم</span></td>
         </tr>
       `).join('');
