@@ -155,6 +155,11 @@
     <div class="summary-row" id="summaryRow"></div>
   </header>
 
+  <div class="card" id="liveStatusBanner" style="display:flex; align-items:center; gap:12px; padding:16px 22px; margin-bottom:22px;">
+    <span class="dot"></span>
+    <span id="liveStatusText" style="font-weight:800; font-size:14.5px;">جارِ التحقق من حالة التحكيم...</span>
+  </div>
+
   <section class="card">
     <div class="section-head">
       <p class="section-title">أفضل 5 فرق</p>
@@ -208,6 +213,34 @@
   ];
   const TOTAL_TEAMS = 15;
   const LEADERBOARD_URL = 'https://hackathon-leaderboard.innovationraces.workers.dev/';
+  const STATUS_URL = 'https://hackathon-leaderboard.innovationraces.workers.dev/status';
+
+  const liveStatusText = document.getElementById('liveStatusText');
+
+  async function loadLiveStatus(){
+    try{
+      const res = await fetch(STATUS_URL, { cache: 'no-store' });
+      const data = await res.json();
+
+      if (!data.team || !data.updatedAt){
+        liveStatusText.textContent = 'لا يوجد تحكيم نشط حاليًا';
+        return;
+      }
+
+      const minutesAgo = (Date.now() - new Date(data.updatedAt).getTime()) / 60000;
+      if (minutesAgo > 20){
+        liveStatusText.textContent = 'لا يوجد تحكيم نشط حاليًا';
+      } else {
+        const teamNum = data.team.replace(/[^0-9]/g, '');
+        liveStatusText.textContent = `الفريق الحالي قيد التحكيم: فريق ${teamNum}`;
+      }
+    }catch(err){
+      liveStatusText.textContent = 'تعذّر تحميل حالة التحكيم';
+    }
+  }
+
+  loadLiveStatus();
+  setInterval(loadLiveStatus, 15000);
 
   const lbBody = document.getElementById('lbBody');
   const lbNote = document.getElementById('lbNote');
