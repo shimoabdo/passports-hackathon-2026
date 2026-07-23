@@ -258,6 +258,12 @@
     formFrame.src = `https://tally.so/r/${code}`;
     currentTeam = n;
 
+    fetch('https://hackathon-leaderboard.innovationraces.workers.dev/status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ team: `team ${n}` }),
+    }).catch(() => { /* non-critical if this fails */ });
+
     nextBtn.disabled = true;
     nextHint.style.display = 'block';
 
