@@ -94,6 +94,16 @@
 
   footer{text-align:center; margin-top:20px; font-size:12px; color:var(--ink-soft);}
 
+  /* team status board */
+  .status-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(140px,1fr)); gap:10px;}
+  .status-card{border:1px solid var(--line); border-radius:10px; padding:12px 14px; text-align:center;}
+  .status-team{font-weight:800; font-size:14px; margin-bottom:8px;}
+  .status-badge{display:inline-block; font-size:11px; font-weight:800; padding:4px 10px; border-radius:999px;}
+  .status-badge.not-started{background:#eceae3; color:var(--ink-soft);}
+  .status-badge.waiting{background:#fdf1de; color:#a6721c;}
+  .status-badge.active{background:#e0f0ff; color:#1d6fa8;}
+  .status-badge.done{background:#e6f4ec; color:var(--ok);}
+
   /* top 5 podium */
   .podium{display:grid; grid-template-columns:repeat(5,1fr); gap:10px;}
   .podium-card{
@@ -162,6 +172,14 @@
 
   <section class="card">
     <div class="section-head">
+      <p class="section-title">حالة كل فريق</p>
+      <p class="refresh-note"><span class="dot"></span><span>يتحدث لايف</span></p>
+    </div>
+    <div class="status-grid" id="statusGrid"></div>
+  </section>
+
+  <section class="card">
+    <div class="section-head">
       <p class="section-title">أفضل 5 فرق</p>
     </div>
     <div class="podium" id="podium"></div>
@@ -216,6 +234,8 @@
   const STATUS_URL = 'https://hackathon-leaderboard.innovationraces.workers.dev/status';
 
   const liveStatusText = document.getElementById('liveStatusText');
+  const statusGrid = document.getElementById('statusGrid');
+  let activeTeamKey = null; // e.g. "team 5", null if none active/fresh
 
   async function loadLiveStatus(){
     try{
@@ -224,22 +244,26 @@
 
       if (!data.team || !data.updatedAt){
         liveStatusText.textContent = 'لا يوجد تحكيم نشط حاليًا';
+        activeTeamKey = null;
         return;
       }
 
       const minutesAgo = (Date.now() - new Date(data.updatedAt).getTime()) / 60000;
       if (minutesAgo > 20){
         liveStatusText.textContent = 'لا يوجد تحكيم نشط حاليًا';
+        activeTeamKey = null;
       } else {
         const teamNum = data.team.replace(/[^0-9]/g, '');
         liveStatusText.textContent = `الفريق الحالي قيد التحكيم: فريق ${teamNum}`;
+        activeTeamKey = data.team;
       }
     }catch(err){
       liveStatusText.textContent = 'تعذّر تحميل حالة التحكيم';
+      activeTeamKey = null;
     }
   }
 
-  loadLiveStatus();
+  // initial call happens later, chained with loadData()
   setInterval(loadLiveStatus, 15000);
 
   const lbBody = document.getElementById('lbBody');
@@ -330,6 +354,7 @@
 
       let completeCount = 0;
       let covHtml = '';
+      let statusHtml = '';
       for (let n = 1; n <= TOTAL_TEAMS; n++){
         const teamKey = `team ${n}`;
         const judgesDone = byTeam[teamKey] || byTeam[`team${n}`] || [];
@@ -352,8 +377,26 @@
             </p>
           </div>
         `;
+
+        // ---- team status badge (3 states) ----
+        let statusClass, statusLabel;
+        if (isComplete){
+          statusClass = 'done'; statusLabel = 'تم التقييم';
+        } else if (judgesDone.length === 0){
+          statusClass = 'not-started'; statusLabel = 'لم يبدأ';
+        } else {
+          statusClass = 'active'; statusLabel = 'قيد التقييم';
+        }
+
+        statusHtml += `
+          <div class="status-card">
+            <div class="status-team">فريق ${n}</div>
+            <span class="status-badge ${statusClass}">${statusLabel}</span>
+          </div>
+        `;
       }
       covGrid.innerHTML = covHtml;
+      statusGrid.innerHTML = statusHtml;
 
       // ---- summary ----
       summaryRow.innerHTML = `
@@ -366,7 +409,8 @@
     }
   }
 
-  loadData();
+  loadLiveStatus().then(loadData);
+  setInterval(loadLiveStatus, 15000);
   setInterval(loadData, 20000);
 
   // ---------- Password gate ----------
